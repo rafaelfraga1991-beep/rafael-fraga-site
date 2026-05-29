@@ -12,7 +12,7 @@ export default function Header() {
     { id: 'about',      label: t.nav.about },
     { id: 'journey',    label: t.nav.journey },
     { id: 'projects',   label: t.nav.projects },
-    { id: 'skills',     label: t.nav.skills },
+    { id: 'education',  label: t.nav.education },
     { id: 'newsletter', label: t.nav.content },
     { id: 'portfolio',  label: t.nav.portfolio },
     { id: 'contact',    label: t.nav.contact },

@@ -28,8 +28,8 @@ export default function Home() {
         <ImpactNumbers />
         <Timeline />
         <ProjectsSection />
-        <SkillsSection />
         <EducationSection />
+        <SkillsSection />
         <NewsletterSection />
         <PortfolioGallery />
         <Manifesto />
