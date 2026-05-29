@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --green:  #B0BEC5;   /* prata metálica — accent principal */
+  --blue:   #ECEFF1;   /* branco gelo — accent secundário  */
+  --silver-dark: #607D8B;
+  --orange: #ff6b35;
+  --bg:     #070707;
+  --card:   rgba(255,255,255,0.028);
+  --border: rgba(255,255,255,0.07);
+  --text:   #f0f0f0;
+  --muted:  #777777;
+  --faint:  #444444;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+::selection { background: rgba(176,190,197,0.3); color: #fff; }
+
+/* ── Scrollbar ───────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(176,190,197,0.3); }
+
+/* ── Scroll Animations ───────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.40s; }
+.reveal-delay-6 { transition-delay: 0.48s; }
+
+/* On small screens: shorter, faster animations */
+@media (max-width: 640px) {
+  .reveal {
+    transform: translateY(16px);
+    transition-duration: 0.4s;
+  }
+  /* Reduce stagger delays on mobile for snappier feel */
+  .reveal-delay-1 { transition-delay: 0.05s; }
+  .reveal-delay-2 { transition-delay: 0.10s; }
+  .reveal-delay-3 { transition-delay: 0.15s; }
+  .reveal-delay-4 { transition-delay: 0.20s; }
+  .reveal-delay-5 { transition-delay: 0.25s; }
+  .reveal-delay-6 { transition-delay: 0.30s; }
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ── Neon utilities ──────────────────────────── */
+.neon-green  { color: var(--green); }
+.neon-blue   { color: var(--blue); }
+.neon-orange { color: var(--orange); }
+
+.glow-green  { text-shadow: 0 0 24px rgba(176,190,197,0.5); }
+.glow-blue   { text-shadow: 0 0 24px rgba(144,164,174,0.5); }
+
+.border-neon-green { border-color: rgba(176,190,197,0.35) !important; }
+.border-neon-blue  { border-color: rgba(144,164,174,0.35) !important; }
+
+/* ── Glass card ──────────────────────────────── */
+.glass-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+/* Disable hover lift on touch devices */
+@media (hover: hover) {
+  .glass-card:hover {
+    border-color: rgba(176,190,197,0.2);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(176,190,197,0.08);
+    transform: translateY(-3px);
+  }
+}
+
+/* ── Section layout — mobile-first ──────────── */
+.section {
+  padding: 56px 0;
+  position: relative;
+}
+@media (min-width: 641px)  { .section { padding: 80px 0; } }
+@media (min-width: 1025px) { .section { padding: 104px 0; } }
+
+.section-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+@media (min-width: 641px)  { .section-inner { padding: 0 24px; } }
+@media (min-width: 1025px) { .section-inner { padding: 0 40px; } }
+
+/* ── Section heading ─────────────────────────── */
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+.section-title {
+  font-size: clamp(1.65rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.section-subtitle {
+  font-size: clamp(0.88rem, 2vw, 1rem);
+  color: var(--muted);
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+/* ── Buttons — mobile-first with 44px touch targets ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  min-height: 44px;
+  background: linear-gradient(135deg, #607D8B, #ECEFF1);
+  color: #0a0a0a;
+  font-weight: 700;
+  font-size: 0.88rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(96,125,139,0.35);
+  letter-spacing: 0.01em;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (hover: hover) {
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(176,190,197,0.45);
+  }
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
+  min-height: 44px;
+  background: transparent;
+  color: #B0BEC5;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 8px;
+  border: 1px solid rgba(176,190,197,0.4);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (hover: hover) {
+  .btn-secondary:hover {
+    background: rgba(176,190,197,0.08);
+    border-color: rgba(236,239,241,0.6);
+    color: #ECEFF1;
+    transform: translateY(-2px);
+  }
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
+  min-height: 44px;
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (hover: hover) {
+  .btn-ghost:hover {
+    background: rgba(255,255,255,0.09);
+    border-color: rgba(255,255,255,0.18);
+    transform: translateY(-2px);
+  }
+}
+
+/* ── Neon line decoration ────────────────────── */
+.neon-line {
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #607D8B, #ECEFF1);
+  border-radius: 2px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(176,190,197,0.3);
+}
+
+/* ── Tag / chip ──────────────────────────────── */
+.tag {
+  display: inline-block;
+  padding: 5px 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: rgba(255,255,255,0.04);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+@media (hover: hover) {
+  .tag:hover {
+    border-color: rgba(176,190,197,0.35);
+    color: var(--green);
+    background: rgba(176,190,197,0.06);
+  }
+}
+
+/* ── Background decorations ──────────────────── */
+.bg-glow-green {
+  position: absolute;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(176,190,197,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.bg-glow-blue {
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(144,164,174,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Grid pattern overlay ────────────────────── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* ── Gradient text ───────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #607D8B 0%, #ECEFF1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Language transition ─────────────────────── */
+.lang-fade { transition: opacity 0.2s ease; }
+.lang-fade.switching { opacity: 0; }
