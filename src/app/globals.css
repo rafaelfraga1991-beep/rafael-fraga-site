@@ -18,7 +18,8 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+html { scroll-behavior: smooth; scroll-padding-top: 108px; }
+@media (min-width: 768px) { html { scroll-padding-top: 72px; } }
 
 body {
   background-color: var(--bg);
